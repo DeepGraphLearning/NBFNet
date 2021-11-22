@@ -1,0 +1,43 @@
+output_dir: ~/experiments/
+
+dataset:
+  class: OGBLBioKG
+  path: ~/datasets/knowledge_graphs/
+
+task:
+  class: KnowledgeGraphCompletionOGB
+  model:
+    class: NBFNet
+    input_dim: 32
+    hidden_dims: [32, 32, 32, 32, 32, 32]
+    message_func: distmult
+    aggregate_func: pna
+    short_cut: yes
+    layer_norm: yes
+    dependent: yes
+    remove_one_hop: yes
+  criterion: bce
+  evaluator:
+    class: Evaluator
+    name: ogbl-biokg
+  num_negative: 32
+  strict_negative: yes
+  heterogeneous_negative: yes
+  adversarial_temperature: 0.5
+  sample_weight: no
+
+optimizer:
+  class: Adam
+  lr: 2.0e-4
+
+engine:
+  gpus: {{ gpus }}
+  batch_size: 32
+  log_interval: 10
+
+train:
+  num_epoch: 0
+  batch_per_epoch: 200
+
+checkpoint: {{ checkpoint }}
+metric: mrr
