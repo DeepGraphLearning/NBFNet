@@ -28,7 +28,7 @@ def train_and_validate(cfg, solver):
         solver.save("model_epoch_%d.pth" % solver.epoch)
         solver.model.split = "valid"
         metric = solver.evaluate("valid")
-        result = metric[args.metric]
+        result = metric[cfg.metric]
         if result > best_result:
             best_result = result
             best_epoch = solver.epoch
