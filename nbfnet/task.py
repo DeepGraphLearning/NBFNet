@@ -57,11 +57,6 @@ class KnowledgeGraphCompletionExt(tasks.KnowledgeGraphCompletion, core.Configura
         # in case of GPU OOM
         return mask, target, relation.cpu()
 
-    @torch.no_grad()
-    def _strict_negative(self, pos_h_index, pos_t_index, pos_r_index):
-        if not self.heterogeneous:
-            return super(KnowledgeGraphCompletionExt, self)._strict_negative(pos_h_index, pos_t_index, pos_r_index)
-
     def evaluate(self, pred, target):
         mask, target, relation = target
 
