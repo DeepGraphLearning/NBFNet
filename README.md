@@ -11,7 +11,7 @@ This is the official codebase of the paper
 
 [paper]: https://arxiv.org/pdf/2106.06935.pdf
 
-NeurIPS 2021
+A PyG re-implementation of NBFNet can be found [here](https://github.com/KiddoZhu/NBFNet-PyG).
 
 ## Overview ##
 
