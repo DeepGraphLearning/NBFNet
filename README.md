@@ -71,7 +71,7 @@ python -m torch.distributed.launch --nproc_per_node=4 script/run.py -c config/in
 ```
 
 ```bash
-python -m torch.distributed.launch --nnodes=4 --nproc_per_node=4 script/run.py -c config/inductive/wn18rr.yaml --gpus[0,1,2,3,0,1,2,3,0,1,2,3,0,1,2,3]
+python -m torch.distributed.launch --nnodes=4 --nproc_per_node=4 script/run.py -c config/inductive/wn18rr.yaml --gpus [0,1,2,3,0,1,2,3,0,1,2,3,0,1,2,3]
 ```
 
 ### Visualize Interpretations on FB15k-237 ###
