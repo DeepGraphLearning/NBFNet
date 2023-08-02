@@ -6,7 +6,7 @@ from torch import autograd
 
 from torch_scatter import scatter_add
 
-from torchdrug import core, layers, utils
+from torchdrug import core, layers
 from torchdrug.layers import functional
 from torchdrug.core import Registry as R
 
@@ -92,7 +92,6 @@ class NeuralBellmanFordNetwork(nn.Module, core.Configurable):
                             num_relation=1, meta_dict=graph.meta_dict, **graph.data_dict)
         return graph
 
-    @utils.cached
     def bellmanford(self, graph, h_index, r_index, separate_grad=False):
         query = self.query(r_index)
         index = h_index.unsqueeze(-1).expand_as(query)
@@ -213,7 +212,7 @@ class NeuralBellmanFordNetwork(nn.Module, core.Configurable):
             message = message[order].flatten()
             msg_source = msg_source[order].flatten(0, -2)
             size = scatter_add(torch.ones_like(node_out), node_out, dim_size=num_node)
-            msg2out = functional._size_to_index(size[node_out_set] * num_beam)
+            msg2out = torch.repeat_interleave(size[node_out_set] * num_beam)
             # deduplicate
             is_duplicate = (msg_source[1:] == msg_source[:-1]).all(dim=-1)
             is_duplicate = torch.cat([torch.zeros(1, dtype=torch.bool, device=self.device), is_duplicate])

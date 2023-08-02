@@ -21,6 +21,7 @@ task:
   strict_negative: yes
   adversarial_temperature: 1
   sample_weight: no
+  full_batch_eval: yes
 
 optimizer:
   class: Adam
